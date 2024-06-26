@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Misty Wiki</title>
+    <link rel="shortcut icon" href="../assets/misty-logo.jpeg" type="image/x-icon">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
+</head>
+
+<body>
+    <div class="container">
+        <nav class="navbar bg-dark border-bottom border-body">
+            <h2 class="navbar-brand" href="#">Misty Wiki</h2>
+        </nav>
+
+        <h4 class="pt-5">Dependencies</h4>
+        <div class="list-group">
+            <a href="https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html" target="_blank"
+                class="list-group-item list-group-item-action">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">Java 17</h5>
+                    <small class="text-body-secondary">Required</small>
+                </div>
+                <p class="mb-1 text-body-secondary">The plugin won't work for Java 8.</p>
+            </a>
+            <a href="https://papermc.io/downloads/all" target="_blank" class="list-group-item list-group-item-action">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">Spigot/Paper Spigot 1.8.8 - 1.20.6</h5>
+                    <small class="text-body-secondary">Required</small>
+                </div>
+                <p class="mb-1 text-body-secondary">The plugin support only 1.8.8 - 1.20.6, Paper is recommented.</p>
+            </a>
+            <a href="https://www.mongodb.com/products/platform/atlas-database" target="_blank"
+                class="list-group-item list-group-item-action">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">MongoDB Database</h5>
+                    <small class="text-body-secondary">Required</small>
+                </div>
+                <p class="mb-1 text-body-secondary">MongoDB need to use for data saved for player.</p>
+            </a>
+            <a href="#" class="list-group-item list-group-item-action" data-bs-toggle="modal"
+                data-bs-target="#staticBackdrop">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">Chunky or WorldBorder</h5>
+                    <small class="text-body-secondary">Required</small>
+                </div>
+                <p class="mb-1 text-body-secondary">
+                    WorldBorder for 1.8.8 - 1.12.x other version use Chunky.
+                </p>
+            </a>
+
+            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-footer">
+                            <a href="https://www.spigotmc.org/resources/chunky.81534/" target="_blank"
+                                class="btn btn-success">Chunky</a>
+                            <a href="https://dev.bukkit.org/projects/worldborder" target="_blank"
+                                class="btn btn-success">WorldBorder</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <a href="https://lunarclient.dev/apollo/downloads" target="_blank"
+                class="list-group-item list-group-item-action">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">Apollo</h5>
+                </div>
+                <p class="mb-1 text-body-secondary">For support LunarClient API.</p>
+            </a>
+            <a href="https://www.spigotmc.org/resources/decentholograms-1-8-1-20-6-papi-support-no-dependencies.96927/"
+                target="_blank" class="list-group-item list-group-item-action">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">Decent Holograms</h5>
+                </div>
+                <p class="mb-1 text-body-secondary">For support Holograms.</p>
+            </a>
+            <hr>
+            <h4 class="pt-3">Commands and Permissions</h4>
+            <ul class="list-group">
+                <li class="list-group-item">
+                    <span class="badge text-body-white text-bg-secondary">/backpacks</span>
+                    - Open team backpacks.
+                    <span class="badge text-body-white text-bg-secondary">Permission: none</span>
+                </li>
+                <li class="list-group-item">
+                    <span class="badge text-body-white text-bg-secondary">/border [size]</span>
+                    - Shrink border size.
+                    <span class="badge text-body-white text-bg-secondary">Permission: misty.command.border</span>
+                </li>
+                <li class="list-group-item">
+                    <span class="badge text-body-white text-bg-secondary">/chat [mute, unmute]</span>
+                    - Mute or Un-mute the server chat.
+                    <span class="badge text-body-white text-bg-secondary">Permission: misty.command.chat</span>
+                </li>
+                <li class="list-group-item">
+                    <span class="badge text-body-white text-bg-secondary">/config</span>
+                    - View currently game configuration.
+                    <span class="badge text-body-white text-bg-secondary">Permission: none</span>
+                </li>
+                <li class="list-group-item">
+                    <span class="badge text-body-white text-bg-secondary">/data</span>
+                    - Manage player stats
+                    <span class="badge text-body-white text-bg-secondary">Permission: misty.command.data</span>
+                    <hr>
+                    /data wipe - Reset all player data.
+                    <br>
+                    /data reset [player] - Reset target player data.
+                    <br>
+                    /data add [player] [data] [amount] - Add player data amount.
+                    <br>
+                    /data remove [player] [data] [amount] - Remove player data amount.
+                    <br>
+                    /data set [player] [data] [amount] - Set player data amount.
+                </li>
+                <li class="list-group-item">
+                    <span class="badge text-body-white text-bg-secondary">/disqualify</span>
+                    - Open disqualify menu.
+                    <span class="badge text-body-white text-bg-secondary">Permission: misty.command.disqualify</span>
+                </li>
+                <li class="list-group-item">
+                    <span class="badge text-body-white text-bg-secondary">/health [player]</span>
+                    - View player health.
+                    <span class="badge text-body-white text-bg-secondary">Permission: none</span>
+                </li>
+                <li class="list-group-item">
+                    <span class="badge text-body-white text-bg-secondary">/uhchologram [create, delete]
+                        [leaderboard]</span>
+                    - Create or Delete hologram using Leaderboard type.
+                    <span class="badge text-body-white text-bg-secondary">Permission: misty.command.hologram</span>
+                </li>
+                <li class="list-group-item">
+                    <span class="badge text-body-white text-bg-secondary">/invsee [player]</span>
+                    - View target player inventory.
+                    <span class="badge text-body-white text-bg-secondary">Permission: misty.command.invsee</span>
+                </li>
+                <li class="list-group-item">
+                    <span class="badge text-body-white text-bg-secondary">/killtop</span>
+                    - List current top 10 kills player.
+                    <span class="badge text-body-white text-bg-secondary">Permission: none</span>
+                </li>
+                <li class="list-group-item">
+                    <span class="badge text-body-white text-bg-secondary">/latescatter</span>
+                    - Late-scatter yourself.
+                    <span class="badge text-body-white text-bg-secondary">Permission: none</span>
+                    <hr>
+                    /latescatter [player] - Late-scatter target player
+                    <span class="badge text-body-white text-bg-secondary">Permission: misty.latescatter.other</span>
+                </li>
+                <li class="list-group-item">
+                    <span class="badge text-body-white text-bg-secondary">/leaderboards</span>
+                    - View leaderboards.
+                    <span class="badge text-body-white text-bg-secondary">Permission: none</span>
+                </li>
+                <li class="list-group-item">
+                    <span class="badge text-body-white text-bg-secondary">/lft</span>
+                    - Send a Looking for team message to all players.
+                    <span class="badge text-body-white text-bg-secondary">Permission: none</span>
+                </li>
+                <li class="list-group-item">
+                    <span class="badge text-body-white text-bg-secondary">/misty</span>
+                    - Check plugin infomation.
+                    <span class="badge text-body-white text-bg-secondary">Permission: none</span>
+                    <hr>
+                    /misty listteam - List all alive team.
+                    <span class="badge text-body-white text-bg-secondary">Permission: misty.admin</span>
+                    <br>
+                    /misty listalive - List all alive players.
+                    <span class="badge text-body-white text-bg-secondary">Permission: misty.admin</span>
+                </li>
+                <li class="list-group-item">
+                    <span class="badge text-body-white text-bg-secondary">/practice</span>
+                    - Join/Leave practice.
+                    <span class="badge text-body-white text-bg-secondary">Permission: none</span>
+                    <hr>
+                    /practice help - Show help page.
+                    <span class="badge text-body-white text-bg-secondary">Permission: misty.command.practice</span>
+                    <br>
+                    /practice toggle - Toggle on/off practice.
+                    <span class="badge text-body-white text-bg-secondary">Permission: misty.command.practice</span>
+                    <br>
+                    /practice setmax [amount] - Set max player for practice.
+                    <span class="badge text-body-white text-bg-secondary">Permission: misty.command.practice</span>
+                    <br>
+                    /practice setkit - Set your current inventory to practice kit.
+                    <span class="badge text-body-white text-bg-secondary">Permission: misty.command.practice</span>
+                    <br>
+                    /practice setlocation - Set your location to practice main location.
+                    <span class="badge text-body-white text-bg-secondary">Permission: misty.command.practice</span>
+                    <br>
+                </li>
+                <li class="list-group-item">
+                    <span class="badge text-body-white text-bg-secondary">/recipes</span>
+                    - Show recipes for CustomCraft scenario item.
+                    <span class="badge text-body-white text-bg-secondary">Permission: none</span>
+                </li>
+                <li class="list-group-item">
+                    <span class="badge text-body-white text-bg-secondary">/rescatter</span>
+                    - Rescatter yourself.
+                    <span class="badge text-body-white text-bg-secondary">Permission: misty.command.rescatter</span>
+                </li>
+                <li class="list-group-item">
+                    <span class="badge text-body-white text-bg-secondary">/respawn [player]</span>
+                    - Respawn player.
+                    <span class="badge text-body-white text-bg-secondary">Permission: misty.command.respawn</span>
+                </li>
+                <li class="list-group-item">
+                    <span class="badge text-body-white text-bg-secondary">/scenarios</span>
+                    - View all enabled scenarios.
+                    <span class="badge text-body-white text-bg-secondary">Permission: none</span>
+                    <hr>
+                    /scenarios admin - Open all scenarios menu to toggle.
+                    <span class="badge text-body-white text-bg-secondary">Permission: misty.scenario</span>
+                    <br>
+                    /scenarios toggle [scenario] - Toggle on/off scenario.
+                    <span class="badge text-body-white text-bg-secondary">Permission: misty.scenario</span>
+                </li>
+                <li class="list-group-item">
+                    <span class="badge text-body-white text-bg-secondary">/stats [player]</span>
+                    - View target player stats.
+                    <span class="badge text-body-white text-bg-secondary">Permission: none</span>
+                </li>
+                <li class="list-group-item">
+                    <span class="badge text-body-white text-bg-secondary">/sendcoords</span>
+                    - Send your coords to teammate.
+                    <span class="badge text-body-white text-bg-secondary">Permission: none</span>
+                </li>
+                <li class="list-group-item">
+                    <span class="badge text-body-white text-bg-secondary">/tc [message]</span>
+                    - Send message to team members.
+                    <span class="badge text-body-white text-bg-secondary">Permission: none</span>
+                </li>
+                <li class="list-group-item">
+                    <span class="badge text-body-white text-bg-secondary">/team</span>
+                    - Main command for team system.
+                    <span class="badge text-body-white text-bg-secondary">Permission: none</span>
+                    <hr>
+                    /team create - Create a new team.
+                    <br>
+                    /team invite [player] - Invite player to team.
+                    <br>
+                    /team list [player] - Show player's team members.
+                    <br>
+                    /team random - Toggle on/off random teammate.
+                    <br>
+                    /team leave - Leave team.
+                    <br>
+                    /team accept [player] - Accept team from player.
+                    <br>
+                    /team request [player] - Send a request message to player.
+                </li>
+                <li class="list-group-item">
+                    <span class="badge text-body-white text-bg-secondary">/uhc</span>
+                    - Main command for the plugin.
+                    <span class="badge text-body-white text-bg-secondary">Permission: misty.host</span>
+                    <hr>
+                    /uhc settings - Open UHC settings menu.
+                    <br>
+                    /uhc host [player] - Set player to host.
+                    <br>
+                    /uhc schedule [time] - Set the timer for start game.
+                    <br>
+                    /uhc setspawn - Set your location to main spawn location.
+                    <br>
+                    /uhc setstarteritems - Set your inventory as starter items.
+                    <br>
+                    /uhc checkbp [player] - View player's team backpacks.
+                    <br>
+                    /uhc clearlag - Clear all entities.
+                    <br>
+                    /uhc removealive - Remove target player from alive player.
+                    <br>
+                    /uhc checkwinner - Attempt to check the winner.
+                </li>
+                <li class="list-group-item">
+                    <span class="badge text-body-white text-bg-secondary">/whitelist</span>
+                    - Show all whitelist command.
+                    <span class="badge text-body-white text-bg-secondary">Permission: misty.whitelist</span>
+                    <hr>
+                    /whitelist add [player] - Add target player to whitelist.
+                    <br>
+                    /whitelist remove [player] - Remove target player from whitelist.
+                    <br>
+                    /whitelist toggle - Toggle on/off the whitelist.
+                    <br>
+                    /whitelist list - Show all whitelisted players.
+                </li>
+            </ul>
+            <hr>
+            <h4 class="pt-3">Scenarios</h4>
+            <ul class="list-group">
+                <li class="list-group-item">Absorptionless</li>
+                <li class="list-group-item">Backpacks</li>
+                <li class="list-group-item">Bald Chicken</li>
+                <li class="list-group-item">Barebones</li>
+                <li class="list-group-item">Bats</li>
+                <li class="list-group-item">Bed Bomb</li>
+                <li class="list-group-item">Bleeding Sweets</li>
+                <li class="list-group-item">Blocked</li>
+                <li class="list-group-item">Block Rush</li>
+                <li class="list-group-item">Blood Diamonds</li>
+                <li class="list-group-item">Bowless</li>
+                <li class="list-group-item">Chump Charity</li>
+                <li class="list-group-item">Cold Weapon</li>
+                <li class="list-group-item">Companion Bench</li>
+                <li class="list-group-item">Creeper Pong</li>
+                <li class="list-group-item">Cupid</li>
+                <li class="list-group-item">Custom Craft</li>
+                <li class="list-group-item">Cut Clean</li>
+                <li class="list-group-item">Diamondless</li>
+                <li class="list-group-item">Do Not Disturb</li>
+                <li class="list-group-item">Double Health</li>
+                <li class="list-group-item">Double Ores</li>
+                <li class="list-group-item">Eggs</li>
+                <li class="list-group-item">Enchantless</li>
+                <li class="list-group-item">Entropy</li>
+                <li class="list-group-item">Fireless</li>
+                <li class="list-group-item">Flower Power</li>
+                <li class="list-group-item">Frozen In Time</li>
+                <li class="list-group-item">Gap Zap</li>
+                <li class="list-group-item">Goldless</li>
+                <li class="list-group-item">Gold Rush</li>
+                <li class="list-group-item">Gone Fishing</li>
+                <li class="list-group-item">Hairy Sheep</li>
+                <li class="list-group-item">Hastey Babies</li>
+                <li class="list-group-item">Hastey Boys</li>
+                <li class="list-group-item">Homework</li>
+                <li class="list-group-item">Kill Switch</li>
+                <li class="list-group-item">Light Out</li>
+                <li class="list-group-item">Love At First Sight</li>
+                <li class="list-group-item">No Clean</li>
+                <li class="list-group-item">No Fall</li>
+                <li class="list-group-item">Pearl Giver</li>
+                <li class="list-group-item">Permanight</li>
+                <li class="list-group-item">Player Swap</li>
+                <li class="list-group-item">Puppy Power</li>
+                <li class="list-group-item">Pyro</li>
+                <li class="list-group-item">Red vs Blue</li>
+                <li class="list-group-item">Rodless</li>
+                <li class="list-group-item">Safeloot</li>
+                <li class="list-group-item">Secret Health</li>
+                <li class="list-group-item">Sheep Lovers</li>
+                <li class="list-group-item">
+                    Shieldless
+                    <span class="badge text-body-white text-bg-secondary">1.9+</span>
+                </li>
+                <li class="list-group-item">Sky High</li>
+                <li class="list-group-item">Soup</li>
+                <li class="list-group-item">Speed Demon</li>
+                <li class="list-group-item">Stock Up</li>
+                <li class="list-group-item">Superheroes</li>
+                <li class="list-group-item">Switcheroo</li>
+                <li class="list-group-item">Swordless</li>
+                <li class="list-group-item">Timber</li>
+                <li class="list-group-item">Timebomb</li>
+                <li class="list-group-item">Tracker</li>
+                <li class="list-group-item">Triple Ores</li>
+                <li class="list-group-item">Ultra Paranoid</li>
+                <li class="list-group-item">Webcage</li>
+                <li class="list-group-item">Zoomies</li>
+            </ul>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
